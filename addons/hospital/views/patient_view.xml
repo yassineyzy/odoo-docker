@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="view_hospital_patient_tree">
+      <field name="name">hospital.patient.tree</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="f_name"></field>
+          <field name="l_name"></field>
+          <field name="gender"></field>
+          <field name="identity"></field>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_hospital_patient_form">
+      <field name="name">hospital.patient.form</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="f_name"></field>
+                <field name="l_name"></field>
+                <field name="gender"></field>
+                <field name="identity"></field>
+              </group>
+              <group>
+                <field name="adress"></field>
+                <field name="subscribe_date"></field>
+                <field name="email"></field>
+                <field name="phone"></field>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_hospital_patient_search">
+      <field name="name">hospital.patient.search</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="f_name" filter_domain="['|', ('f_name','ilike',self), ('l_name','ilike',self)]"></field>
+          <field name="l_name"></field>
+          <field name="identity"></field>
+        </search>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_hospital_patient">
+      <field name="name">Patients</field>
+      <field name="res_model">hospital.patient</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Create your first patient!
+        </p>
+      </field>
+    </record>
+
+    <menuitem name="Patient" id="hospital_patient_details_patient" parent="hospital_patient_details" action="action_hospital_patient"/>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="hospital.action_server">
+      <field name="name">hospital server</field>
+      <field name="model_id" ref="model_hospital_hospital"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+
+</odoo>
